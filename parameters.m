@@ -1,6 +1,6 @@
 ground.dimensions = [1, 1, 0.01];
 
-chassis.dimentions = [0.010, 0.05, 0.1];
+chassis.dimensions = [0.010, 0.05, 0.1];
 tire.geometry.radius = 0.02;
 tire.geometry.length = 0.01;
 
