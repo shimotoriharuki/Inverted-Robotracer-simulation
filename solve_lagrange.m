@@ -74,5 +74,15 @@ f_p = subs(f_p, cos(theta_p(t)), 1);
 f_w = subs(f_w, sin(theta_p(t)), 0);
 f_w = subs(f_w, cos(theta_p(t)), 1);
 
+%係数をまとめる
+f_p = collect(f_p, diff(diff(theta_p, t))); %ddtheta_p
+f_p = collect(f_p, diff(diff(theta_w, t))); %ddtheta_w
+f_p = collect(f_p, theta_p); %theta_p
+
+f_w = collect(f_w, diff(diff(theta_p, t))); %ddtheta_p
+f_w = collect(f_w, diff(diff(theta_w, t))); %ddtheta_w
+f_w = collect(f_w, theta_p); %theta_p
+
+
 latex(f_p)
 latex(f_w)
