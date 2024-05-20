@@ -36,24 +36,34 @@ C = [1, 0, 0, 0;
      0, 0, 1, 0;
      0, 0, 0, 1];
 
-% 可制御　可観測
+% 可制御
 Uc = [B, A*B, A^2*B, A^3*B];
-det(Uc)
+if det(Uc) ~= 0
+    disp('可制御である')
+end
+
+Q = [10, 0, 0, 0;
+     0, 1, 0, 0;
+     0, 0, 0.01, 0;
+     0, 0, 0, 0.01];
+R = 0.01;
+f = lqr(A, B, Q, R);
 
 %シミュレーション
 dt = 0.001;
-t = 0 : dt : 0.1;
+t = 0 : dt : 10;
 i = 0;
-x = [0; 0; 0; 0];
-u = 1;
-x1 = []; %d_theta_p
-x2 = []; %dd_theta_p
-x3 = []; %d_theta_w
-x4 = []; %dd_theta_w
+x = [1; 0; 0; 0];
+u = 0;
+x1 = []; %theta_p
+x2 = []; %dtheta_p
+x3 = []; %theta_w
+x4 = []; %dtheta_w
 for n = t
     i = i + 1;
     dx = A * x + B * u;
     x = x + dx * dt;
+    u = -f * x;
     
     x1 = [x1, x(1)];
     x2 = [x2, x(2)];
@@ -64,19 +74,19 @@ end
 subplot(2, 2, 1)
 plot(t, x1);
 legend('theta_p')
-title('状態方程式のシミュレーション')
+title('状態フィードバックのシミュレーション')
 
 subplot(2, 2, 2)
 plot(t, x2);
-legend('d_theta_p')
-title('状態方程式のシミュレーション')
+legend('dtheta_p')
+title('状態フィードバックのシミュレーション')
 
 subplot(2, 2, 3)
 plot(t, x3);
-legend('dth_1')
-title('状態方程式のシミュレーション')
+legend('theta_w')
+title('状態フィードバックシミュレーション')
 
 subplot(2, 2, 4)
 plot(t, x4);
-legend('dth_2')
-title('状態方程式のシミュレーション')
+legend('dtheta_w')
+title('状態フィードバックのシミュレーション')
