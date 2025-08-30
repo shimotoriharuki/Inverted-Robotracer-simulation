@@ -1,17 +1,16 @@
 
-
-m_w= 16e-3; % ホイールの重さ [kg]
-m_p= 348e-3; % 振子の重さ [kg]
-r_w= 30.5e-3; % ホイールの半径 [m]
-r_p= 83e-3; % 振子の重心までの距離 [m]
-J_w= 12.5e-6; % ホイールとタイヤのイナーシャ[kg m^2]
-J_p= 1.117e-3; % 振子のイナーシャの半分[kg m^2]
-J_m= 1.51e-8; % モータの回転子のイナーシャ[kg m^2]
+m_w= 33e-3; % ホイールの重さ [kg]
+m_p= 193e-3; % 振子の重さ [kg]
+r_w= 33e-3; % ホイールの半径 [m]
+r_p= 70e-3; % 振子の重心までの距離 [m]
+J_w= 0.477e-4; % ホイールのイナーシャ
+J_p= 6.498e-4; % 振子のイナーシャ ??
+J_m= 0.151e-7; % モータの回転子のイナーシャ
 g= 9.8; % 重力加速度 [m/s^2]
 n= 6; % 減速比
 kt= 3.52e-3; %トルク定数 [Nm/A]
-kn= 2710; % 回転数定数[rpm/V] 2710 410
-ke= 60 / (kn* 2*pi); %起電力定数 [V/(rad/s)]
+kn= 2710; % 回転数定数[rpm/V]
+ke= 1 / (kn* 2*pi / 60); %起電力定数 [V/(rad/s)]
 R= 2.9; %内部抵抗 [Ω]
 t_md = 0; % 摩擦トルク[Nm]
 V_offset = R * t_md / kt;
@@ -33,4 +32,5 @@ spur_gear.geometry.length = 0.005;
 pinion_gear.geometry.radius = 0.005;
 pinion_gear.geometry.length = 0.005;
 
+% center_distance = spur_gear.geometry.radius+pinion_gear.geometry.radius;
 center_distance = 0.02;
